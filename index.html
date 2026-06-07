@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z世代撼動好萊塢 ── 低成本 × 高共鳴的逆襲</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold1:#fff1a8;--gold2:#e9b949;--gold3:#b8860b;--gold4:#fff6cf;
+    --hi-white:#ffffff;--hi-yellow:#ffe680;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    color:#dff5ec;text-align:center;line-height:1.95;
+    background:#02120d;overflow-x:hidden;padding-bottom:200px;
+  }
+  /* ===== 背景：翡翠綠 × 翡翠藍 交互重疊 ===== */
+  .bg-layer{position:fixed;inset:0;z-index:-3;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(16,185,129,.55), transparent 45%),
+      radial-gradient(circle at 82% 30%, rgba(6,182,212,.50), transparent 48%),
+      radial-gradient(circle at 30% 80%, rgba(6,148,162,.45), transparent 50%),
+      radial-gradient(circle at 75% 78%, rgba(5,150,105,.45), transparent 50%),
+      linear-gradient(135deg,#02120d 0%,#03241f 45%,#04222b 70%,#02141a 100%);}
+  .bg-blob{position:fixed;inset:-20%;z-index:-2;filter:blur(70px);opacity:.55;
+    background:
+      radial-gradient(circle at 40% 40%, rgba(16,185,129,.6), transparent 35%),
+      radial-gradient(circle at 60% 60%, rgba(6,182,212,.6), transparent 35%);
+    animation:drift 22s ease-in-out infinite alternate;}
+  @keyframes drift{0%{transform:translate(-4%,-3%) scale(1) rotate(0);}100%{transform:translate(5%,4%) scale(1.15) rotate(8deg);}}
+  #stars{position:fixed;inset:0;z-index:-1;pointer-events:none;}
+
+  /* ===== 跑馬燈 ===== */
+  .marquee{position:relative;z-index:5;overflow:hidden;white-space:nowrap;
+    background:linear-gradient(90deg,rgba(2,18,13,.9),rgba(4,40,40,.9),rgba(2,18,13,.9));
+    border-bottom:1px solid rgba(233,185,73,.5);box-shadow:0 0 18px rgba(233,185,73,.3);}
+  .marquee span{display:inline-block;padding:10px 0;font-size:.95rem;letter-spacing:2px;
+    color:var(--gold4);text-shadow:0 0 8px rgba(233,185,73,.7);animation:roll 40s linear infinite;}
+  @keyframes roll{from{transform:translateX(100vw);}to{transform:translateX(-100%);}}
+
+  /* ===== 主標題：金色流光 12 秒 ===== */
+  header{padding:60px 18px 30px;}
+  .maintitle{font-family:"Noto Serif TC",serif;font-weight:900;
+    font-size:clamp(2.2rem,7vw,4.6rem);line-height:1.25;letter-spacing:3px;
+    background:linear-gradient(115deg,var(--gold3) 0%,var(--gold2) 22%,var(--gold4) 42%,#fff 50%,var(--gold4) 58%,var(--gold2) 78%,var(--gold3) 100%);
+    background-size:300% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
+    animation:shimmer 12s linear infinite;filter:drop-shadow(0 2px 14px rgba(233,185,73,.35));}
+  @keyframes shimmer{0%{background-position:0% 50%;}100%{background-position:300% 50%;}}
+  .subtitle{margin-top:18px;font-size:clamp(1rem,2.5vw,1.25rem);color:var(--hi-yellow);
+    letter-spacing:1px;text-shadow:0 0 10px rgba(255,230,128,.4);}
+  .sub2{margin-top:8px;font-size:.95rem;color:#9fe6cf;opacity:.85;}
+
+  /* ===== 區段卡片：不同彩色霓虹外框（閃爍） ===== */
+  section{max-width:780px;margin:28px auto;padding:0 16px;}
+  .card{border-radius:22px;padding:30px 24px;position:relative;backdrop-filter:blur(3px);}
+  .neon{border:2px solid;animation:flicker 3.4s infinite alternate;}
+  @keyframes flicker{
+    0%,17%,21%,55%,60%,100%{box-shadow:0 0 10px var(--nc),0 0 24px var(--nc),inset 0 0 14px rgba(255,255,255,.05);border-color:var(--nc);}
+    19%,58%{box-shadow:0 0 4px var(--nc);border-color:rgba(255,255,255,.25);}
+  }
+  .c-cyan  {background:linear-gradient(160deg,#031b2e,#04101c);--nc:#22d3ee;}
+  .c-amber {background:linear-gradient(160deg,#241a05,#140d02);--nc:#ffb02e;}
+  .c-emer  {background:linear-gradient(160deg,#03241f,#01140f);--nc:#34d399;}
+  .c-violet{background:linear-gradient(160deg,#160a2e,#0b0518);--nc:#a78bfa;}
+  .c-rose  {background:linear-gradient(160deg,#2a0a16,#15050b);--nc:#ff6b9d;}
+  .c-lime  {background:linear-gradient(160deg,#14210a,#0a1305);--nc:#a3e635;}
+
+  .sectitle{font-family:"Noto Serif TC",serif;font-weight:700;
+    font-size:clamp(1.4rem,4vw,2rem);margin-bottom:6px;color:var(--hi-white);
+    text-shadow:0 0 12px rgba(255,255,255,.35);line-height:1.5;}
+  .sectitle .ye{color:var(--hi-yellow);}
+  .lead{color:#cdeee0;font-size:1.02rem;margin:14px auto 4px;max-width:680px;}
+  .hi-w{color:var(--hi-white);font-weight:700;}
+  .hi-y{color:var(--hi-yellow);font-weight:700;text-shadow:0 0 8px rgba(255,230,128,.4);}
+
+  /* ===== 影片卡（陣列驅動，點擊展開）===== */
+  .films{display:flex;flex-direction:column;gap:18px;margin-top:10px;}
+  .film{border-radius:18px;overflow:hidden;cursor:pointer;border:2px solid;
+    transition:transform .25s, box-shadow .25s;}
+  .film:hover{transform:translateY(-3px);}
+  .film .poster{height:118px;position:relative;display:flex;align-items:center;justify-content:center;
+    font-family:"Noto Serif TC",serif;font-weight:900;font-size:1.45rem;color:#fff;
+    text-shadow:0 2px 10px rgba(0,0,0,.6);letter-spacing:1px;padding:0 10px;}
+  .film .poster::after{content:"";position:absolute;inset:0;opacity:.32;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 10px,transparent 10px 20px);}
+  .p1{background:radial-gradient(circle at 30% 30%,#0f766e,#022c22 70%);}
+  .p2{background:radial-gradient(circle at 70% 30%,#7e1f4f,#2a061a 70%);}
+  .film .body{padding:16px 18px;background:rgba(2,15,11,.72);}
+  .badge{display:inline-block;font-size:.78rem;padding:3px 12px;border-radius:999px;
+    background:rgba(233,185,73,.15);color:var(--gold4);border:1px solid rgba(233,185,73,.4);
+    letter-spacing:1px;margin-bottom:8px;}
+  .meta{font-size:.95rem;color:#bfe9d9;margin:3px 0;}
+  .meta b{color:var(--hi-yellow);}
+  .tap{font-size:.8rem;color:#7fd9be;margin-top:10px;letter-spacing:1px;opacity:.85;}
+  .detail{max-height:0;overflow:hidden;transition:max-height .55s ease;}
+  .detail ul{list-style:none;padding:6px 4px 4px;}
+  .detail li{padding:10px 0;border-top:1px dashed rgba(255,255,255,.12);font-size:.95rem;color:#dff5ec;}
+  .detail li:first-child{border-top:none;}
+  .detail li::before{content:"✦ ";color:var(--gold2);}
+  .film.open .detail{max-height:680px;}
+  .film.open .tap{color:var(--gold4);}
+
+  /* ===== 數據卡 / 觀點卡 / 引述卡（陣列驅動）===== */
+  .grid{display:flex;flex-direction:column;gap:14px;margin-top:10px;}
+  .tile{border-radius:16px;padding:16px 18px;border:2px solid;background:rgba(2,16,12,.62);transition:.3s;}
+  .stat-t{font-weight:700;color:var(--hi-white);font-size:1.02rem;}
+  .stat-d{color:#cfeee2;font-size:.95rem;margin-top:6px;}
+  .stat-d b{color:var(--hi-yellow);}
+
+  .ins{cursor:pointer;}
+  .ins .q{font-weight:700;color:var(--hi-white);font-size:1.05rem;}
+  .ins .a{max-height:0;overflow:hidden;transition:max-height .45s ease;color:#cfeee2;font-size:.95rem;}
+  .ins.open .a{max-height:340px;margin-top:8px;}
+
+  .quote{color:#e8fff6;font-size:.98rem;}
+  .quote .src{display:block;margin-top:6px;color:var(--gold4);font-size:.85rem;letter-spacing:1px;}
+
+  .think{cursor:pointer;}
+  .think .q{font-weight:700;color:var(--hi-yellow);font-size:1.02rem;}
+
+  /* ===== 結語 ===== */
+  .closing{font-size:1.08rem;color:var(--hi-white);max-width:660px;margin:18px auto;}
+  .closing .hi-y{font-size:1.13rem;}
+
+  /* ===== footer ===== */
+  footer{margin:44px auto 16px;padding:0 18px 8px;font-size:.85rem;color:#8fd2bd;}
+  .srctitle{color:var(--gold4);letter-spacing:2px;margin-bottom:8px;font-weight:700;}
+  .srclist{max-width:680px;margin:0 auto;line-height:1.95;color:#a8ddcc;opacity:.9;}
+  .credit{margin-top:18px;font-size:.8rem;color:#6fbfa8;letter-spacing:3px;opacity:.85;}
+
+  /* ===== 底部膠囊座（固定底部）===== */
+  .voicewrap{position:fixed;left:0;right:0;bottom:14px;z-index:50;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;}
+
+  /* ===== YouTube 影片膠囊（金色流光靜止）===== */
+  .ytcap{pointer-events:auto;position:relative;display:flex;align-items:center;gap:11px;
+    padding:9px 18px;border-radius:999px;background:rgba(2,16,12,.93);backdrop-filter:blur(8px);
+    max-width:92vw;text-decoration:none;transition:transform .15s;}
+  .ytcap:active{transform:scale(.97);}
+  .ytcap::before{content:"";position:absolute;inset:-2px;border-radius:999px;padding:2px;z-index:-1;
+    background:conic-gradient(from 0deg,var(--gold3),var(--gold4),#fff,var(--gold2),var(--gold4),var(--gold3),var(--gold4),var(--gold3));
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;filter:drop-shadow(0 0 7px rgba(233,185,73,.65));}
+  .ytbtn{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;font-size:.95rem;color:#fff;
+    background:radial-gradient(circle at 35% 30%,#ff5c5c,#cc0000 70%);
+    box-shadow:0 0 10px rgba(255,40,40,.6);transition:transform .15s;}
+  .ytbtn:active{transform:scale(.9);}
+  .ytlink{margin-left:2px;color:var(--gold4);text-decoration:none;font-size:.95rem;opacity:.85;transition:opacity .2s;}
+  .ytlink:hover{opacity:1;}
+  .ytpanel{position:fixed;left:50%;transform:translateX(-50%);bottom:116px;z-index:49;
+    width:min(340px,86vw);aspect-ratio:16/9;border-radius:14px;overflow:hidden;display:none;
+    background:#000;box-shadow:0 0 0 2px var(--gold2),0 10px 30px rgba(0,0,0,.6),0 0 16px rgba(233,185,73,.5);}
+  .ytpanel.show{display:block;}
+  .ytpanel #ytholder,.ytpanel iframe{width:100%;height:100%;border:0;display:block;}
+  .ytclose{position:absolute;top:5px;right:6px;z-index:3;border:none;cursor:pointer;
+    width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.65);color:#fff;font-size:1rem;line-height:1;
+    display:flex;align-items:center;justify-content:center;}
+  .ytlabel{font-family:"Noto Serif TC",serif;font-weight:700;font-size:.92rem;letter-spacing:2px;
+    color:var(--gold4);white-space:nowrap;text-shadow:0 0 8px rgba(233,185,73,.5);}
+  .ytsub{font-size:.72rem;color:#7fd9be;white-space:nowrap;}
+  @media(max-width:440px){.ytsub{display:none;}.ytcap{gap:9px;padding:8px 14px;}}
+</style>
+</head>
+<body>
+  <div class="bg-layer"></div>
+  <div class="bg-blob"></div>
+  <canvas id="stars"></canvas>
+
+  <div class="marquee"><span>【影壇焦點】20 歲導演凱恩·帕森斯的《後室》以約 1,000 萬美元成本，開出全球 1.18 億、締造 A24 史上最大開片；26 歲導演 Curry Barker 的《Obsession》僅 75 萬美元，卻連兩週逆勢成長、票房破億　──　兩位 YouTuber 同月擊敗 1.65 億的星戰大作。媒體稱這是 Z 世代推動、可能載入史冊的產業轉向：打動人心的，不是「新」，而是「真」。　·　</span></div>
+
+  <header>
+    <h1 class="maintitle">Z 世代撼動好萊塢</h1>
+    <div class="subtitle">當低成本遇上高共鳴　──　YouTube 原生作者的逆襲</div>
+    <div class="sub2">《後室》Backrooms × 《Obsession》｜現象觀察與深度評論</div>
+  </header>
+
+  <!-- 1. 兩部片 -->
+  <section>
+    <div class="card neon c-cyan">
+      <div class="sectitle">兩部撼動好萊塢的<span class="ye">低成本電影</span></div>
+      <p class="lead">點擊卡片，展開各自的數據與背景。一個用 <span class="hi-y">1,000 萬美元</span> 締造 A24 開片紀錄，一個僅 <span class="hi-y">75 萬美元</span> 卻一路逆勢成長破億。</p>
+      <div class="films" id="filmList"></div>
+    </div>
+  </section>
+
+  <!-- 2. 數據 -->
+  <section>
+    <div class="card neon c-amber">
+      <div class="sectitle">數據<span class="ye">會說話</span></div>
+      <p class="lead">同一個月，兩部微預算恐怖片，正面擊敗 1.65 億美元的星戰大作。</p>
+      <div class="grid" id="statList"></div>
+    </div>
+  </section>
+
+  <!-- 3. 現象解析 -->
+  <section>
+    <div class="card neon c-emer">
+      <div class="sectitle">這個現象，<span class="ye">真正說明了什麼？</span></div>
+      <p class="lead">點擊每一則，展開說明。</p>
+      <div class="grid" id="insightList"></div>
+    </div>
+  </section>
+
+  <!-- 4. 媒體怎麼說 -->
+  <section>
+    <div class="card neon c-violet">
+      <div class="sectitle">主流媒體<span class="ye">怎麼說</span></div>
+      <p class="lead">不只是票房新聞，各大媒體都在追問「這對產業意味著什麼」。</p>
+      <div class="grid" id="quoteList"></div>
+    </div>
+  </section>
+
+  <!-- 5. 兩條不同的路 -->
+  <section>
+    <div class="card neon c-rose">
+      <div class="sectitle">小心：這其實是<span class="ye">兩條不同的路</span></div>
+      <p class="lead">IndieWire 提醒，把兩片過度綁在一起會誤導。它們給產業的，是不同的功課。</p>
+      <div class="grid" id="pathList"></div>
+    </div>
+  </section>
+
+  <!-- 6. 提醒 + 思考 -->
+  <section>
+    <div class="card neon c-lime">
+      <div class="sectitle">給創作者的<span class="ye">提醒</span></div>
+      <p class="closing">並不是「AI 讓大製片變便宜，所以年輕人買單」，而是<span class="hi-w">成熟的低成本工具，讓網路原生作者得以用影院規格說自己的故事</span>，而產業終於開始正視他們是作者。</p>
+      <p class="closing">當製作門檻持續被科技壓低，最稀缺、也最難被取代的，會是<span class="hi-y">「你到底想說什麼、為誰而說」</span>。工具人人都拿得到的時候，勝負就回到作者本身。</p>
+      <div class="sectitle" style="font-size:1.3rem;margin-top:24px;">留給你<span class="ye">思考的問題</span></div>
+      <p class="lead">點一下，展開提問。</p>
+      <div class="grid" id="thinkList"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="srctitle">資 訊 來 源</div>
+    <div class="srclist">
+      自由財經 · 三立新聞網 · NOWnews 今日新聞 · 太報 · JUKSY 街星 · 維基百科<br>
+      Variety · Deadline · The Wrap · Axios · CBC News · IndieWire · NBC News<br>
+      South China Morning Post · Malay Mail · USA Today · Screen Daily · Puck · Rotten Tomatoes · The Ankler
+    </div>
+    <div class="credit">Integrated by t-s-y</div>
+  </footer>
+
+  <!-- 音樂膠囊 + 影片視窗 -->
+  <div class="voicewrap">
+    <div class="ytcap">
+      <button class="ytbtn" id="ytbtn" aria-label="音樂開關">▶</button>
+      <span class="ytlabel">A beautiful world</span>
+      <span class="ytsub">音樂影片</span>
+      <a class="ytlink" href="https://youtu.be/w0ZOqzvGjUA" target="_blank" rel="noopener" aria-label="在 YouTube 開啟">↗</a>
+    </div>
+  </div>
+  <div class="ytpanel" id="ytpanel"><div id="ytholder"></div><button class="ytclose" id="ytclose" aria-label="關閉影片">×</button></div>
+
+<script>
+/* ===== 星空瀑布 ===== */
+(function(){const c=document.getElementById('stars'),x=c.getContext('2d');let w,h,st=[];
+ function size(){w=c.width=innerWidth;h=c.height=innerHeight;
+  st=Array.from({length:120},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.1+0.2,s:Math.random()*0.5+0.15,o:Math.random()*0.6+0.2}));}
+ size();addEventListener('resize',size);
+ (function loop(){x.clearRect(0,0,w,h);for(const s of st){x.beginPath();x.arc(s.x,s.y,s.r,0,7);x.fillStyle='rgba(220,255,240,'+s.o+')';x.fill();s.y+=s.s;if(s.y>h){s.y=-2;s.x=Math.random()*w;}}requestAnimationFrame(loop);})();})();
+
+/* ===== 彩色霓虹工具 ===== */
+const PAL=['#22d3ee','#ff6b9d','#34d399','#ffb02e','#a78bfa','#ff8a5b','#a3e635','#38bdf8'];
+function glow(el,c){el.style.borderColor=c;el.style.boxShadow='0 0 12px '+c+'66, inset 0 0 10px '+c+'22';}
+
+/* ===== 影片資料 ===== */
+const films=[
+ {cls:'p1',color:'#22d3ee',title:'《後室》Backrooms',badge:'恐怖 · 氛圍',
+  meta:['導演：<b>凱恩·帕森斯 Kane Parsons（20 歲）</b>','預算：<b>約 1,000 萬美元</b>','票房：<b>全球 1.18 億 · 北美開片 8,140 萬</b>'],
+  detail:[
+   '從 YouTube 頻道「Kane Pixels」起家，以 4chan 都市傳說 creepypasta 為底，打造 liminal space（閾限空間）恐怖宇宙。',
+   'A24 發行，五天內成為其北美影史最賣座電影，並締造 14 年來最大開片，打破《美國內戰》2,550 萬美元紀錄（近三倍）。',
+   '帕森斯成為影史最年輕的票房冠軍導演，前紀錄為喬許·傳克 27 歲（《超能失控》）。',
+   '爛番茄開出約 78% 「新鮮」，後獲 Certified Fresh 認證。',
+   '卡司：奇維托·艾吉佛、坎城影后蕾娜特·萊茵斯薇、馬克·杜普拉斯。',
+   '監製陣容含溫子仁、Shawn Levy 等；杜普拉斯公開反駁「影子導演」質疑，稱凱恩百分之百掌控全局。'
+  ]},
+ {cls:'p2',color:'#ff6b9d',title:'《Obsession》愛你致死不渝',badge:'喜劇恐怖 · 心理驚悚',
+  meta:['導演：<b>Curry Barker（26 歲）</b>','預算：<b>75 萬美元 · 20 天拍成</b>','票房：<b>全球 1.48–1.5 億 · 跨越北美 1 億</b>'],
+  detail:[
+   '導演來自阿拉巴馬，經營 YouTube 喜劇頻道「that\'s a bad idea」，約 110–120 萬訂閱。',
+   '前作《Milk & Serial》僅 800 美元拍成，在網路爆紅後一戰成名。',
+   '多倫多影展首映後，Focus Features 以 1,500 萬美元買下，創影展史上最高片價。',
+   '監製傑森·布倫指出，這是自《E.T.》以來，唯一連兩個週末票房不跌反升的院線片。',
+   '第二週末 +30%、第三週末再 +10%，逆勢成長正式跨越北美 1 億美元。',
+   '劇情：青年 Bear 打破「許願柳」想換得暗戀對象的愛，願望成真卻帶來恐怖反噬；Barker 已簽 A24 執導《德州電鋸殺人狂》重啟。'
+  ]}
+];
+const fl=document.getElementById('filmList');
+films.forEach(f=>{const el=document.createElement('div');el.className='film';glow(el,f.color);
+ el.innerHTML=`<div class="poster ${f.cls}">${f.title}</div><div class="body"><span class="badge">${f.badge}</span>${f.meta.map(m=>`<div class="meta">${m}</div>`).join('')}<div class="detail"><ul>${f.detail.map(d=>`<li>${d}</li>`).join('')}</ul></div><div class="tap">▾ 點擊展開／收合</div></div>`;
+ el.addEventListener('click',()=>el.classList.toggle('open'));fl.appendChild(el);});
+
+/* ===== 數據 ===== */
+const stats=[
+ {t:'《後室》開片爆量',d:'北美首週末 <b>8,140 萬</b>、全球 <b>1.18 億</b> 美元；對戲院、對原創恐怖片都是歷史級數字。'},
+ {t:'《Obsession》逆勢長紅',d:'全球 <b>1.48 億</b> 美元；第二週末 <b>+30%</b>、第三週末再 <b>+10%</b>，以小搏大超過百倍預算。'},
+ {t:'對照組：星戰摔跤',d:'《曼達洛人與格羅古》預算 <b>1.65 億</b>，第二週重摔約 <b>70%</b>，淪為週末第三名。'},
+ {t:'觀眾年齡懸殊',d:'《後室》<b>86%</b> 觀眾在 35 歲以下、<b>44%</b> 未滿 21；星戰同期 25 歲以下僅 <b>27%</b>。'},
+ {t:'網路聲量是底氣',d:'YouTube 內部數據：去年「backrooms」相關影片觀看破 <b>20 億</b>次、FNAF 相關破 <b>130 億</b>次。'}
+];
+const sl=document.getElementById('statList');
+stats.forEach((s,i)=>{const el=document.createElement('div');el.className='tile';glow(el,PAL[i%PAL.length]);
+ el.innerHTML=`<div class="stat-t">${s.t}</div><div class="stat-d">${s.d}</div>`;sl.appendChild(el);});
+
+/* ===== 觀點 ===== */
+const insights=[
+ {q:'Z 世代捨棄的，是「公式」嗎？',a:'不是。他們捨棄的，是<span class="hi-y">沒有靈魂的安全牌</span>。兩部片其實都很懂類型公式，贏在作者有清楚的視覺語言與聲音。'},
+ {q:'真正打動人的是什麼？',a:'不是「新」，而是<span class="hi-y">「真」</span>──觀眾能感覺到，背後是一個有具體品味的人，而不是被市場磨平的委員會決議。'},
+ {q:'好萊塢過去如何看待 YouTuber？',a:'多半當成<span class="hi-w">流量入口或行銷素材</span>，很少當成能掌鏡的作者。如今才正視：他們本來就是成熟的作者，只是沒被這樣對待。'},
+ {q:'低成本，是因為 AI 嗎？',a:'主因是十多年來成熟的<span class="hi-w">攝影、剪輯與遊戲引擎</span>工具。AI 是這條曲線上最新的<span class="hi-y">加速器，而非起點</span>。'},
+ {q:'年輕世代為何認同？',a:'關鍵在<span class="hi-y">文化歸屬</span>。題材長在這代人的網路文化裡（liminal space、creepypasta、詐騙頻道），是「我們的東西、由我們的人做的」。'},
+ {q:'要小心什麼陷阱？',a:'<span class="hi-w">倖存者偏誤</span>。你看到的是中獎的兩張票，沒看到的是上千部同樣真誠卻無人問津的作品。低成本，不等於必紅。'}
+];
+const il=document.getElementById('insightList');
+insights.forEach((it,i)=>{const el=document.createElement('div');el.className='tile ins';glow(el,PAL[(i+2)%PAL.length]);
+ el.innerHTML=`<div class="q">${it.q}</div><div class="a">${it.a}</div>`;
+ el.addEventListener('click',()=>el.classList.toggle('open'));il.appendChild(el);});
+
+/* ===== 媒體引述 ===== */
+const quotes=[
+ {q:'兩片皆由二十多歲的 YouTuber 製作，代表 Z 世代推動的、可能載入史冊的產業轉向。',s:'— Axios'},
+ {q:'正如音樂錄影帶與廣告，曾為大衛·芬奇、麥可·貝鋪路；如今 YouTube 正在孕育下一代導演。',s:'— The Wrap'},
+ {q:'這是產業潛在的真正轉捩點，他們用打動年輕族群的作品突圍。',s:'— The Ankler（Matthew Frank）'},
+ {q:'一份針對 200 名 17 至 18 歲青少年的調查顯示，他們厭倦超級英雄、續集與衍生作，較不在意大明星，多半透過社群短影音得知新片。',s:'— Variety／Puck（Screen Engine 研究）'},
+ {q:'年輕觀眾不進戲院的舊敘事，被這兩部片推翻了；社群粉絲基礎加上新鮮的恐怖故事，把 Z 世代帶回大銀幕。',s:'— Art Threat／CBC News'}
+];
+const ql=document.getElementById('quoteList');
+quotes.forEach((c,i)=>{const el=document.createElement('div');el.className='tile';glow(el,PAL[(i+4)%PAL.length]);
+ el.innerHTML=`<div class="quote">“${c.q}”<span class="src">${c.s}</span></div>`;ql.appendChild(el);});
+
+/* ===== 兩條不同的路 ===== */
+const paths=[
+ {t:'《後室》的功課',d:'要產業<b>重新思考 IP 從哪裡來</b>。網路原生世界觀（如《玩具熊的五夜後宮》）一旦被認真投資，就可能成為下一個系列。'},
+ {t:'《Obsession》的功課',d:'證明<b>微預算 × 原創概念 × 聰明行銷</b>也能單飛，不必倚賴既有 IP，純靠口碑滾動就能破億。'},
+ {t:'別過度綁在一起',d:'把兩者混為「原創必勝、續集已死」太武斷。它們是<b>兩種不同的成功路徑</b>，學錯方向反而危險。'}
+];
+const pl=document.getElementById('pathList');
+paths.forEach((p,i)=>{const el=document.createElement('div');el.className='tile';glow(el,PAL[(i+5)%PAL.length]);
+ el.innerHTML=`<div class="stat-t">${p.t}</div><div class="stat-d">${p.d}</div>`;pl.appendChild(el);});
+
+/* ===== 思考題 ===== */
+const thinks=[
+ {q:'如果工具人人可得，你的作品「一看就知道是你做的」嗎？',a:'辨識度，會成為最稀缺的資產。問問自己：拿掉名字，別人認得出這是你嗎？'},
+ {q:'你的題材，長在哪一群人的真實文化裡？',a:'共鳴來自歸屬感。先想清楚「為誰而說」，作品才有可能被那群人擁抱、轉發。'},
+ {q:'你願意為了保有創作掌控權，承擔多少風險？',a:'帕森斯堅持自己執導、把控細節。掌控權往往要用風險與準備去換。'},
+ {q:'你看到的爆款，是趨勢，還是倖存者偏誤？',a:'別只看中獎的票。真正能複製的，是「真誠的聲音 + 對的發行環境」，不是低成本本身。'}
+];
+const tl=document.getElementById('thinkList');
+thinks.forEach((t,i)=>{const el=document.createElement('div');el.className='tile ins think';glow(el,PAL[(i+1)%PAL.length]);
+ el.innerHTML=`<div class="q">${t.q}</div><div class="a">${t.a}</div>`;
+ el.addEventListener('click',()=>el.classList.toggle('open'));tl.appendChild(el);});
+
+/* ===== 逗號斷行：有「，」者直接跳入下行 ===== */
+['.lead','.closing','.meta','.detail li','.stat-t','.stat-d','.ins .q','.ins .a','.quote','.think .q']
+ .forEach(sel=>document.querySelectorAll(sel).forEach(e=>{e.innerHTML=e.innerHTML.replace(/，/g,'，<br>');}));
+
+/* ===== YouTube 音樂播放（▶／⏸ 開關自如 / IFrame API） ===== */
+var ytPlayer=null,ytReady=false,ytPlaying=false;
+var ytbtnEl=document.getElementById('ytbtn');
+var ytPanel=document.getElementById('ytpanel');
+function openVid(){if(!ytPanel)return;ytPanel.classList.add('show');ytbtnEl.textContent='⏸';
+  try{if(ytReady&&ytPlayer)ytPlayer.playVideo();}catch(e){}}
+function closeVid(){if(!ytPanel)return;ytPanel.classList.remove('show');ytbtnEl.textContent='▶';
+  try{if(ytReady&&ytPlayer)ytPlayer.pauseVideo();}catch(e){}}
+window.onYouTubeIframeAPIReady=function(){
+  ytPlayer=new YT.Player('ytholder',{width:'100%',height:'100%',videoId:'w0ZOqzvGjUA',
+    playerVars:{playsinline:1,rel:0},
+    events:{
+      onReady:function(){ytReady=true;},
+      onStateChange:function(e){
+        if(e.data===YT.PlayerState.PLAYING){ytPlaying=true;}
+        else{ytPlaying=false;}
+      },
+      onError:function(){ytbtnEl.textContent='↗';}
+    }});
+};
+ytbtnEl.addEventListener('click',function(){
+  if(ytPanel.classList.contains('show'))closeVid();else openVid();
+});
+document.getElementById('ytclose').addEventListener('click',closeVid);
+(function(){var t=document.createElement('script');t.src='https://www.youtube.com/iframe_api';document.head.appendChild(t);})();
+</script>
+</body>
+</html>
